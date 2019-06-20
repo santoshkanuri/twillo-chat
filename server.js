@@ -9,7 +9,13 @@ const credentials = process.env.credentials || {
 }
 const port = process.env.PORT || 8081
 var app = new express();
-var tokenProvider = new TokenProvider(credentials);
+var tokenProvider = new TokenProvider({
+  "accountSid": process.env.accountSid,
+  "signingKeySid": process.env.signingKeySid,
+  "signingKeySecret":  process.env.signingKeySecret,
+  "serviceSid":  process.env.serviceSid,
+  "pushCredentialSid": process.env.pushCredentialSid
+});
 
 if (credentials.authToken) {
   console.warn('WARNING: The "authToken" field is deprecated. Please use "signingKeySecret".');
